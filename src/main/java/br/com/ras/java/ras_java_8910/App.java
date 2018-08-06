@@ -15,6 +15,7 @@ public class App {
         // Colleciont.of
         // List.of Map.of Set.of
         // Jigsaw
+        // http://blog.caelum.com.br/o-minimo-que-voce-deve-saber-de-java-9/
         System.out.println( "JAVA10!" );
         // TODO
         //  String name = "Rodrigo Turini";
