@@ -17,9 +17,9 @@ public class App {
         // Jigsaw
         // http://blog.caelum.com.br/o-minimo-que-voce-deve-saber-de-java-9/
         System.out.println( "JAVA10!" );
-        // TODO
-        //  String name = "Rodrigo Turini";
-        // var name = "Rodrigo Turini";
+        // INFERENCIA DE TIPOS
+        //  String name = "Rodrigo";
+        // var name = "Rodrigo";
          
         // User user = users.findBy(name);
         // var user = users.findBy(name);
