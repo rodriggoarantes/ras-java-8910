@@ -8,7 +8,7 @@ public final class CenarioCadeiaFactory {
     return new CenarioCadeiaFactory();
   }
   
-  public final CenarioChain factory(CadeiaEnum tipo) {
+  public final CenarioChain get(CadeiaEnum tipo) {
     final CenarioChain chain;
     switch (tipo) {
       case SECAO: chain = new CenarioSecao(); break;
