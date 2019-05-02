@@ -4,11 +4,11 @@ public final class CenarioCadeiaFactory {
   
   private CenarioCadeiaFactory() {}
   
-  public final static CenarioCadeiaFactory getInstance() {
+  public final static CenarioCadeiaFactory get() {
     return new CenarioCadeiaFactory();
   }
   
-  public final CenarioChain get(CadeiaEnum tipo) {
+  public final CenarioChain of(CadeiaEnum tipo) {
     final CenarioChain chain;
     switch (tipo) {
       case SECAO: chain = new CenarioSecao(); break;

@@ -31,22 +31,22 @@ public class ChainResponsibilityMain {
   }
   
   private static CenarioChain ordemManual() {
-    final CenarioCadeiaFactory factory = CenarioCadeiaFactory.getInstance();
-    final CenarioChain nivel3 = factory.get(CadeiaEnum.DEPARTAMENTO);
-    final CenarioChain nivel2 = factory.get(CadeiaEnum.SECAO);
+    final CenarioCadeiaFactory factory = CenarioCadeiaFactory.get();
+    final CenarioChain nivel3 = factory.of(CadeiaEnum.DEPARTAMENTO);
+    final CenarioChain nivel2 = factory.of(CadeiaEnum.SECAO);
     nivel2.setNext(nivel3);
-    final CenarioChain nivel1 = factory.get(CadeiaEnum.PRODUTO);
+    final CenarioChain nivel1 = factory.of(CadeiaEnum.PRODUTO);
     nivel1.setNext(nivel2);
     return nivel1;
   }
   
   private static CenarioChain cadeiaAutomatica(List<CadeiaEnum> cadeias) {
-    final CenarioCadeiaFactory factory = CenarioCadeiaFactory.getInstance();
+    final CenarioCadeiaFactory factory = CenarioCadeiaFactory.get();
     if (cadeias != null && !cadeias.isEmpty()) {
       Iterator<CadeiaEnum> it = cadeias.iterator();
-      CenarioChain chain = factory.get(it.next());
+      CenarioChain chain = factory.of(it.next());
       while(it.hasNext()) {
-        chain.setNext( factory.get(it.next()) );
+        chain.setNext( factory.of(it.next()) );
       }
       return chain;
     }
