@@ -1,4 +1,4 @@
-package br.com.ras.java.ras_java_8910;
+package br.com.ras.java;
 
 /**
  * Hello world!

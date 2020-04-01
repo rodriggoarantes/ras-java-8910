@@ -16,6 +16,11 @@ local.properties
 .recommenders
 ./**/.settings/
 .idea
+.project
+.classpath
+.target/
+./**/.target/
+*.class
 
 # External tool builders
 .externalToolBuilders/
@@ -166,9 +171,7 @@ buildNumber.properties
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
 
-
 # End of https://www.gitignore.io/api/java,maven,eclipse,intellij
-
 node_modules/
 .vscode
 dist/
