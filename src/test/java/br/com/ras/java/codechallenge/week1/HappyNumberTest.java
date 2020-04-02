@@ -11,7 +11,6 @@ public class HappyNumberTest {
   
   @Test
   public void test_mysolution() {
-    assertThat(happyNumber.solution(7), equalTo(true));
     assertThat(happyNumber.solution(19), equalTo(true));
   }
   

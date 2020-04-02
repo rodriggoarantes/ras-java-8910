@@ -30,16 +30,15 @@ public class HappyNumber {
   }
 
   private int calcHappy(int n) {
-    char[] caracteres = Integer.toString(n).toCharArray();
+    char[] caracteres = String.valueOf(n).toCharArray();
 
     int result = 0;
     for (int i = 0; i < caracteres.length; i++) {
-      int num = Integer.valueOf(String.valueOf(caracteres[i]));
-      result += Math.pow(num, 2);
+      int num = Character.getNumericValue(caracteres[i]);
+      result += (num * num);
     }
 
-    if (result > 1 && !previous.contains(result)) {
-      previous.add(result);
+    if (result > 1 && !previous.add(result)) {
       return this.calcHappy(result);
     }
     return result;
