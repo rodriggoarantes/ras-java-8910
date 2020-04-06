@@ -54,7 +54,7 @@ public class BestBuyAndSell {
 		}
 
 		if (have) {
-			profit += (nums.length - 1) - stockPrice;
+			profit += (nums[nums.length - 1]) - stockPrice;
 		}
 
 		return profit;
