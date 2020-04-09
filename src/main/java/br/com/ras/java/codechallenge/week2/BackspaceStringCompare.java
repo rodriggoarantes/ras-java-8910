@@ -42,12 +42,14 @@ import java.util.Stack;
 public class BackspaceStringCompare {
 
     public boolean solution(String S, String T) {
-        return build(S).equals(build(T));
+        S = this.empilharLetras(S);
+        T = this.empilharLetras(T);
+        return (S).equals(T);
     }
 
-    public String build(String S) {
+    public String empilharLetras(String texto) {
         final Stack<Character> pilha = new Stack();
-        for (char c: S.toCharArray()) {
+        for (char c: texto.toCharArray()) {
             if (c != '#') {
                 pilha.push(c);
             } else if (!pilha.empty()) {
