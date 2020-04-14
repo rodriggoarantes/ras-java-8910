@@ -40,6 +40,7 @@ package br.com.ras.java.codechallenge.week2;
  *     0 <= shift[i][1] <= 100
  */
 public class StringShifts {
+
     public String solution(String s, int[][] shift) {
         if (s.length() == 1) {
             return s;
