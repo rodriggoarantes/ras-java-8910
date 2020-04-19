@@ -7,7 +7,7 @@ import java.util.Set;
 public class SingleNumber {
 
   public int solution(int[] nums) {
-    final Set<Integer> pull = new HashSet<Integer>(0);
+    final Set<Integer> pull = new HashSet<>(0);
     for (int n : nums) {
       if (pull.contains(n)) {
         pull.remove(n);

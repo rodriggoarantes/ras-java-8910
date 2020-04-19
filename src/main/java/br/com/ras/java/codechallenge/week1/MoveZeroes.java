@@ -37,9 +37,7 @@ public class MoveZeroes {
       }
     }
   }
-  
-  
-  
+
   public void solution1(int[] nums) {
     int countZero = 0;
     for (int i=0; i < nums.length; i++) {
