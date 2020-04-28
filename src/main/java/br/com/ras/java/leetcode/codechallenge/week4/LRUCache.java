@@ -33,7 +33,7 @@ public class LRUCache {
 
     private final Deque<Integer> rank;
     private final Map<Integer, Integer> items;
-    private int capacity;
+    private final int capacity;
 
     LRUCache(int capacity) {
         this.items = new HashMap<>(capacity);
