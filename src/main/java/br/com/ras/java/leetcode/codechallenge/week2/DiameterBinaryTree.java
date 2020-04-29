@@ -1,5 +1,7 @@
 package br.com.ras.java.leetcode.codechallenge.week2;
 
+import br.com.ras.java.leetcode.codechallenge.shared.BinaryTree;
+
 /**
  * Diameter of Binary Tree
  *
@@ -22,81 +24,23 @@ package br.com.ras.java.leetcode.codechallenge.week2;
  */
 public class DiameterBinaryTree {
 
-    public int solution(TreeNode root) {
+    public int solution(BinaryTree.TreeNode root) {
         final BinaryTree tree = new BinaryTree(root);
         return tree.diameter();
     }
 
     int ans;
-    public int best(TreeNode root) {
+    public int best(BinaryTree.TreeNode root) {
         ans = 1;
         depth(root);
         return ans - 1;
     }
 
-    public int depth(TreeNode node) {
+    private int depth(BinaryTree.TreeNode node) {
         if (node == null) return 0;
         int L = depth(node.left);
         int R = depth(node.right);
         ans = Math.max(ans, L+R+1);
         return Math.max(L, R) + 1;
-    }
-
-    public static class BinaryTree {
-        TreeNode root;
-
-        public BinaryTree(int value) {
-            this.add(value);
-        }
-
-        public BinaryTree(TreeNode root) {
-            this.root = root;
-        }
-
-        public int diameter() {
-            return diametro(root);
-        }
-
-        public void add(int value) {
-            root = add(root, value);
-        }
-
-        private static int diametro(TreeNode treeNode) {
-            if (treeNode == null) return 0;
-
-            int countL = altura(treeNode.left);
-            int countR = altura(treeNode.right);
-
-            int diametroL = diametro(treeNode.left);
-            int diametroR = diametro(treeNode.right);
-
-            return Math.max(countL + countR, Math.max(diametroL, diametroR));
-        }
-
-        private static int altura(TreeNode treeNode) {
-            if (treeNode == null) return 0;
-            return (1 + Math.max(altura(treeNode.left), altura(treeNode.right)));
-        }
-
-        private static TreeNode add(TreeNode node, int value) {
-            if (node == null) {
-                return new TreeNode(value);
-            }
-            if (value < node.val) {
-                node.left = add(node.left, value);
-            } else if (value > node.val) {
-                node.right = add(node.right, value);
-            } else {
-                return node;
-            }
-            return node;
-        }
-    }
-
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
     }
 }
