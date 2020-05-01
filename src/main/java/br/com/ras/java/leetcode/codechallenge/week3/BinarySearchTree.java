@@ -1,5 +1,8 @@
 package br.com.ras.java.leetcode.codechallenge.week3;
 
+import br.com.ras.java.leetcode.codechallenge.shared.BinaryTree;
+import br.com.ras.java.leetcode.codechallenge.shared.TreeNode;
+
 /**
  *  * Construct Binary Search Tree from Preorder Traversal
  *
@@ -39,37 +42,8 @@ public class BinarySearchTree {
             bt.add(preorder[i]);
         }
 
-        return bt.root;
+        return bt.getRoot();
     }
 
-    public static class BinaryTree {
-        TreeNode root;
 
-        public BinaryTree(int value) {
-            this.add(value);
-        }
-
-        public void add(int value) {
-            root = add(root, value);
-        }
-
-        private static TreeNode add(TreeNode node, int value) {
-            if (node == null) {
-                return new TreeNode(value);
-            }
-            if (value < node.val) {
-                node.left = add(node.left, value);
-            } else if (value > node.val) {
-                node.right = add(node.right, value);
-            }
-            return node;
-        }
-    }
-
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode(int x) { val = x; }
-    }
 }

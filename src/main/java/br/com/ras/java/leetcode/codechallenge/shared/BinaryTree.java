@@ -1,7 +1,7 @@
 package br.com.ras.java.leetcode.codechallenge.shared;
 
 public class BinaryTree {
-    TreeNode root;
+    private TreeNode root;
 
     public BinaryTree(int value) {
         this.add(value);
@@ -17,6 +17,10 @@ public class BinaryTree {
 
     public void add(int value) {
         root = add(root, value);
+    }
+
+    public TreeNode getRoot() {
+        return this.root;
     }
 
     private static int diametro(TreeNode treeNode) {
@@ -50,17 +54,4 @@ public class BinaryTree {
         return node;
     }
 
-    public static class TreeNode {
-        public int val;
-        public TreeNode left;
-        public TreeNode right;
-
-        public TreeNode() {}
-        public TreeNode(int val) { this.val = val; }
-        public TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
-    }
 }

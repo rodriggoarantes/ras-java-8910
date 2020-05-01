@@ -1,6 +1,6 @@
 package br.com.ras.java.leetcode.codechallenge.week5;
 
-import br.com.ras.java.leetcode.codechallenge.shared.BinaryTree;
+import br.com.ras.java.leetcode.codechallenge.shared.TreeNode;
 
 /**
  * Binary Tree Maximum Path Sum
@@ -34,7 +34,7 @@ import br.com.ras.java.leetcode.codechallenge.shared.BinaryTree;
 public class BinaryTreeMaximumPathSum {
 
     int max = Integer.MIN_VALUE;
-    private int sum(BinaryTree.TreeNode node) {
+    private int sum(TreeNode node) {
         if (node == null) return 0;
         int L = sum(node.left);
         int R = sum(node.right);
@@ -43,17 +43,17 @@ public class BinaryTreeMaximumPathSum {
         return Math.max(node.val, Math.max(R+node.val, L+node.val));
     }
 
-    public int maxPathSum(BinaryTree.TreeNode root) {
+    public int maxPathSum(TreeNode root) {
         sum(root);
         return max;
     }
 
 
-    public int solution(BinaryTree.TreeNode root) {
+    public int solution(TreeNode root) {
         return sumb(root);
     }
 
-    private static int sumb(BinaryTree.TreeNode node) {
+    private static int sumb(TreeNode node) {
         if (node == null) return 0;
 
         int countL = altura(node.left);
@@ -65,7 +65,7 @@ public class BinaryTreeMaximumPathSum {
         return Math.max(Math.max(countL, countR), Math.max(diametroL+diametroR+node.val, node.val));
     }
 
-    private static int altura(BinaryTree.TreeNode node) {
+    private static int altura(TreeNode node) {
         if (node == null) return 0;
         return Math.max(node.val, Math.max(altura(node.right) + node.val, altura(node.left) + node.val));
     }

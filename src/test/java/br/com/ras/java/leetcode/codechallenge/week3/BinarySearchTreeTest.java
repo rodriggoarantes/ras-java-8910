@@ -1,5 +1,6 @@
 package br.com.ras.java.leetcode.codechallenge.week3;
 
+import br.com.ras.java.leetcode.codechallenge.shared.TreeNode;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -12,7 +13,7 @@ public class BinarySearchTreeTest {
     @Test
     public void test_case1() {
         int[] order = new int[]{8,5,1,7,10,12};
-        final BinarySearchTree.TreeNode node = binarySearchTree.bstFromPreorder(order);
+        final TreeNode node = binarySearchTree.bstFromPreorder(order);
         assertThat(node, notNullValue());
         assertThat(node.val, equalTo(8));
         assertThat(node.left.val, equalTo(5));

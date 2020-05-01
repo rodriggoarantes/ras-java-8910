@@ -1,6 +1,7 @@
 package br.com.ras.java.leetcode.codechallenge.week2;
 
 import br.com.ras.java.leetcode.codechallenge.shared.BinaryTree;
+import br.com.ras.java.leetcode.codechallenge.shared.TreeNode;
 
 /**
  * Diameter of Binary Tree
@@ -24,19 +25,19 @@ import br.com.ras.java.leetcode.codechallenge.shared.BinaryTree;
  */
 public class DiameterBinaryTree {
 
-    public int solution(BinaryTree.TreeNode root) {
+    public int solution(TreeNode root) {
         final BinaryTree tree = new BinaryTree(root);
         return tree.diameter();
     }
 
     int ans;
-    public int best(BinaryTree.TreeNode root) {
+    public int best(TreeNode root) {
         ans = 1;
         depth(root);
         return ans - 1;
     }
 
-    private int depth(BinaryTree.TreeNode node) {
+    private int depth(TreeNode node) {
         if (node == null) return 0;
         int L = depth(node.left);
         int R = depth(node.right);
