@@ -3,6 +3,7 @@ package br.com.ras.java.streams;
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
@@ -48,7 +49,7 @@ public class StreamsMain {
   private static void joining() {
     // Convert String to Uppercase and join them using coma
     List<String> G7 = Arrays.asList("USA", "Japan", "France", "Germany", "Italy", "U.K.", "Canada");
-    String G7Countries = G7.stream().map(x -> x.toUpperCase()).collect(Collectors.joining(", "));
+    String G7Countries = G7.stream().map(String::toUpperCase).collect(Collectors.joining(", "));
     System.out.println(G7Countries);
   }
   
@@ -63,7 +64,7 @@ public class StreamsMain {
   }
   
   private static void contagem() {
-    long count = strList.stream().filter(x -> x.isEmpty()).count();
+    long count = strList.stream().filter(String::isEmpty).count();
     System.out.printf("List %s has %d empty strings %n", strList, count);
 
     // Count String with length more than 3
@@ -85,6 +86,16 @@ public class StreamsMain {
     System.out.println("fatorial =  " + result);
   }
 
+  private static void transformacao() {
+    // to map
+    List<String> list = Arrays.asList("USA", "Japan", "France", "Germany", "Italy", "U.K.", "Canada");
+    final Map<String, String> mapString = list.stream()
+            .collect(Collectors.toMap(String::toString, periodo -> periodo));
+
+    long count = mapString.size();
+    System.out.printf("Map %s has %d strings %n", mapString, count);
+  }
+
   public static void main(String[] args) {
     System.out.println(" ------------------------------------ ");
     contagem();
@@ -100,6 +111,8 @@ public class StreamsMain {
     estatistica();
     System.out.println(" ------------------------------------ ");
     reduceMethod();
+    System.out.println(" ------------------------------------ ");
+    transformacao();
   }
 
 }

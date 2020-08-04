@@ -29,5 +29,6 @@ public class App {
          
         // Stream<String> stream = names.stream();
         // var stream = names.stream();
+        System.out.println( "JAVA11!" );
     }
 }
