@@ -2,7 +2,7 @@ package br.com.ras.java.shared;
 
 import java.time.LocalDateTime;
 
-public class LogUtil {
+public abstract class LogUtil {
     protected static void out(String text) {
         System.out.print(text);
     }

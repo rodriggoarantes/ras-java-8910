@@ -6,29 +6,40 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.stream.IntStream;
 
 public class FutureMain {
   
   private static final ExecutorService pool = Executors.newFixedThreadPool(10);
+  private static final ExecutorService chachedPool = Executors.newCachedThreadPool();
 
   public static Callable<String> getData(final int index, final int time) {
-      return new Callable<String>() {
-          @Override
-          public String call() throws Exception {
-              Thread.sleep(time);                
-              return "TESTE-" + index;
-          }
+      return () -> {
+          Thread.sleep(time);
+          return "TESTE-" + index;
       };
   }
   
   public static void main(String[] args) throws InterruptedException, ExecutionException {
+      System.out.printf("chachedPool terminated %s%n", chachedPool.isTerminated());
+      System.out.printf("terminated %s%n", pool.isTerminated());
+
       futureUnica();
       futureDupla();
       futureDupla_reverse();
       futureTriplaInversa();
+
+      completableFeatureMany();
+
       completableFeature();
-      
+
       pool.shutdown();
+      System.out.printf("terminated %s%n", pool.isTerminated());
+      System.out.printf("shut %s%n", pool.isShutdown());
+
+      chachedPool.shutdown();
+      System.out.printf("chachedPool terminated %s%n", chachedPool.isTerminated());
+      System.out.printf("chachedPool shut %s%n", chachedPool.isShutdown());
   }
   
   
@@ -50,7 +61,7 @@ public class FutureMain {
     
     Future<String> f1 = pool.submit(c1);
     Future<String> f2 = pool.submit(c2);
-    
+
     System.out.println(f1.get());
     System.out.println(f2.get());
     
@@ -105,8 +116,12 @@ public class FutureMain {
     System.out.println("Tempo decorrido (segundos) = " + ((end - start)/1.0E9));
   }
   
-  public static String getValor(final int index, final int time) throws InterruptedException {
-    Thread.sleep(time);
+  public static String getValor(final int index, final int time) {
+      try {
+          Thread.sleep(time);
+      } catch (InterruptedException e) {
+          return "TESTE-" + index + "-ERRO";
+      }
     return "TESTE-" + index;
 }
   
@@ -116,18 +131,11 @@ public class FutureMain {
     final long start = System.nanoTime();
     final CompletableFuture<String> future = new CompletableFuture<>();
 
-    CompletableFuture.runAsync(() -> {
-          try {
-              future.complete(getValor(10, 4000));
-          } catch (InterruptedException e) {
-              future.completeExceptionally(e);
-          }
-      }, pool
-    );
+    CompletableFuture.runAsync(() -> future.complete(getValor(10, 6000)), pool);
 
     future.handle((content, ex) -> {
         if (ex == null) {
-            System.out.println(content);
+            System.out.println("content: " + content);
             long end = System.nanoTime();
             System.out.println("Tempo decorrido (segundos) = " + ((end - start) / 1.0E9));
         } else {
@@ -135,8 +143,24 @@ public class FutureMain {
         }
         return null;
     });
-    
-    System.out.println("Fim do metodos CompletableFeature");
+
+    System.out.printf("Fim do metodos completableFeature %s%n", pool.isTerminated());
   }
 
+    private static void completableFeatureMany() {
+        final long start = System.nanoTime();
+
+        IntStream.iterate(0, n -> n+1).limit(20).boxed()
+                .forEach(numb -> {
+                            final int key = 11 + numb;
+                            CompletableFuture.runAsync(() -> getValor(key, 4000), chachedPool)
+                                    .thenAccept(unused -> {
+                                        long end = System.nanoTime();
+                                        System.out.printf("[%d] Tempo decorrido (segundos) = %f %n", key, ((end - start) / 1.0E9));
+                                    });
+                        }
+                );
+
+        System.out.printf("Fim do metodos completableFeatureMany %s%n", pool.isTerminated());
+    }
 }
